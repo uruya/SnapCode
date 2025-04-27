@@ -23,3 +23,9 @@ go.work.sum
 
 # env file
 .env
+
+# Build output
+snapcode
+
+# Generated screenshots
+generated_code.png
