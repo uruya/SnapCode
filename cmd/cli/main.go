@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/base64"
+	"flag"
 	"fmt"
 	"os"
 	"time"
@@ -11,13 +12,18 @@ import (
 )
 
 func main() {
-	// Get code from command line arguments
-	if len(os.Args) < 2 {
-		fmt.Println("Usage: go run main.go '<code string>'")
+	// Define command line options
+	output := flag.String("o", "generated_code.png", "Output file name")
+	flag.Parse()
+
+	// Get remaining arguments (non-optional)
+	args := flag.Args()
+	if len(args) < 1 {
+		fmt.Println("Usage: snapcode [-o output.png] '<code string>'")
 		os.Exit(1)
 	}
 
-	code := os.Args[1]
+	code := args[0]
 
 	// Browser Launch
 	launchURL := launcher.New().Headless(true).MustLaunch()
@@ -36,10 +42,9 @@ func main() {
 
 	// Only the pre element is scrubbed.
 	pre := page.MustElement("pre")
-	outputFile := "generated_code.png"
-	pre.MustScreenshot(outputFile)
+	pre.MustScreenshot(*output)
 
-	fmt.Println("Screenshot saved:", outputFile)
+	fmt.Println("Saved screenshot to:", *output)
 }
 
 // Generate an HTML template from the given code string
