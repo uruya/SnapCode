@@ -16,5 +16,19 @@ SnapCode is a simple CLI tool that converts code snippets into stylish screensho
 git clone git@github.com:uruya/SnapCode.git
 cd SnapCode
 go build -o snapcode ./cmd/cli
-./snapcode 'console.log("Hello, SnapCode!");'
 ```
+
+### Usage
+```bash
+./snapcode -o output/light.png -theme light  'console.log("Hello, SnapCode!");'
+```
+
+## Demo
+
+### Dark Theme (default)
+
+![Dark Theme Example](./examples/dark.png)
+
+### Light Theme
+
+![Light Theme Example](./examples/light.png)
