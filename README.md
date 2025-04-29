@@ -32,3 +32,21 @@ go build -o snapcode ./cmd/cli
 ### Light Theme
 
 ![Light Theme Example](./examples/light.png)
+
+## HTTP API (beta)
+
+| Method | Path      | Body Params                                   | Response          |
+| ------ | --------- | --------------------------------------------- | ----------------- |
+| POST   | /generate | `code` (string) – required<br>`theme` (dark\|light) – optional | `image/png` bytes |
+
+### Quick Example
+
+```bash
+# 1) Run the server
+go run ./cmd/server        # listening on localhost:8080
+
+# 2) Request
+curl -X POST http://localhost:8080/generate \
+     -H "Content-Type: application/json" \
+     -d '{"code":"fmt.Println(\"API Hello\")","theme":"light"}' \
+     --output api_light.png
